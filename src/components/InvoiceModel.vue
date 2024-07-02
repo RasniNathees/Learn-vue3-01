@@ -160,6 +160,7 @@
 import { computed, reactive, watch } from 'vue'
 import type { invoice } from '@/interface/IInvoice'
 import { useInvoiceModelStore } from '@/stores/invoiceModelStore'
+import { uuid } from 'vue3-uuid'
 
 const invoiceModelStore = useInvoiceModelStore()
 
@@ -184,6 +185,8 @@ const newInvoice: invoice = reactive({
   invoiceTotal: undefined
 })
 
+newInvoice.invoiceItemList = []
+
 const dateUnix = Date.now()
 const options: Intl.DateTimeFormatOptions = {
   weekday: 'short', // Or 'long' or 'narrow'
@@ -201,10 +204,10 @@ watch(
     newInvoice.paymentDueDate = date.toLocaleString('en-us', options)
   }
 )
-newInvoice.invoiceItemList = []
+
 const addNewItem = () => {
   const newItem = {
-    id: 1,
+    id: uuid.v4(),
     name: '',
     qty: 0,
     price: 0,
