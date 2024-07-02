@@ -1,0 +1,47 @@
+<template>
+  <div class="home container">
+    <div class="header flex">
+      <div class="div left flex flex-column">
+        <h1>Invoices</h1>
+        <span>there are 5 invoices</span>
+      </div>
+      <div class="right flex">
+        <div class="filter flex">
+          <div @click="showFilterMenu" class="flex">
+            <span>Filter Menue</span>
+            <img src="@/assets/logo.svg" width="20px" height="20px" alt="" />
+            <ul v-show="showFilter" class="filter-menu">
+              <li>sdf</li>
+              <li>sdf</li>
+              <li>sdf</li>
+              <li>sdf</li>
+            </ul>
+          </div>
+        </div>
+        <div @click="openInvoiceModel" class="button flex">
+          <div class="inner-button flex">
+            <img src="@/assets/logo.svg" width="20px" height="20px" alt="" />
+          </div>
+          <span>Add New</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+import { useInvoiceModelStore } from '@/stores/invoiceModelStore'
+
+const invoiceModelStore = useInvoiceModelStore()
+
+let showFilter = ref<boolean>(false)
+
+const showFilterMenu = () => {
+  showFilter.value = !showFilter.value
+}
+
+const openInvoiceModel = () => {
+  const isModelOpen = invoiceModelStore.invoiceModel
+  if (!isModelOpen) invoiceModelStore.toggleInvoiceModel()
+}
+</script>
