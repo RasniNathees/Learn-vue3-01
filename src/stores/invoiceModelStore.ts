@@ -6,7 +6,7 @@ export const useInvoiceModelStore = defineStore('invoice', {
   }),
   getters: {},
   actions: {
-    toggleInvoiceModel() {
+    toggleInvoiceModel(): void {
       this.invoiceModel = !this.invoiceModel
     }
   }

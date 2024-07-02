@@ -36,11 +36,11 @@ const invoiceModelStore = useInvoiceModelStore()
 
 let showFilter = ref<boolean>(false)
 
-const showFilterMenu = () => {
+const showFilterMenu = (): void => {
   showFilter.value = !showFilter.value
 }
 
-const openInvoiceModel = () => {
+const openInvoiceModel = (): void => {
   const isModelOpen = invoiceModelStore.invoiceModel
   if (!isModelOpen) invoiceModelStore.toggleInvoiceModel()
 }

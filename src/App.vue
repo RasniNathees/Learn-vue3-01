@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 import Navigation from './components/Navigation.vue'
 import InvoiceModel from './components/InvoiceModel.vue'
 import { useInvoiceModelStore } from '@/stores/invoiceModelStore'
