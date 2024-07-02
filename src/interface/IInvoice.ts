@@ -1,0 +1,20 @@
+export interface invoice {
+  billerStreetAddress: string
+  billerCity: string
+  billerZipCode: number | undefined
+  billerCountry: string
+  clientName: string
+  clientEmail: string
+  clientStreetAddress: string
+  clientCity: string
+  clientZipCode: number | undefined
+  clientCountry: string
+  invoiceDate: string
+  paymentTerms: string
+  paymentDueDate: string
+  productDescription: string
+  invoicePending: boolean
+  invoiceDraft: boolean
+  invoiceItemList: { id?: number; name?: string; qty: number; price: number; total?: number }[]
+  invoiceTotal: number | undefined
+}
