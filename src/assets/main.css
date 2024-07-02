@@ -247,6 +247,7 @@ header {
       }
 
       .button {
+        margin-top: 20px;
         background-color: var(--rc-primary-color);
         margin-bottom: 50px;
         padding: 10px 8px;
