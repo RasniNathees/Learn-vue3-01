@@ -15,6 +15,6 @@ export interface invoice {
   productDescription: string
   invoicePending: boolean
   invoiceDraft: boolean
-  invoiceItemList: { id?: string; name?: string; qty: number; price: number; total?: number }[]
+  invoiceItemList: { id: string; name: string; qty: number; price: number; total: number }[]
   invoiceTotal: number | undefined
 }

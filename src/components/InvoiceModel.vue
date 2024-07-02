@@ -1,6 +1,6 @@
 <template>
   <div class="invoice-model-wrap flex flex-column">
-    <form class="invoice-content flex flex-column">
+    <form @submit.prevent="submitInvoice" class="invoice-content flex flex-column">
       <h1>New Invoice</h1>
 
       <!-- Bill from -->
@@ -56,15 +56,15 @@
         <div class="location-details flex">
           <div class="input flex flex-column">
             <label for="billerCity"> City</label>
-            <input type="text" id="billerCity" required v-model="newInvoice.billerCity" />
+            <input type="text" id="billerCity" required v-model="newInvoice.clientCity" />
           </div>
           <div class="input flex flex-column">
             <label for="billerZipCode"> ZipCode</label>
-            <input type="text" id="billerZipCode" required v-model="newInvoice.billerZipCode" />
+            <input type="text" id="billerZipCode" required v-model="newInvoice.clientZipCode" />
           </div>
           <div class="input flex flex-column">
             <label for="billerCountry"> Country</label>
-            <input type="text" id="billerCountry" required v-model="newInvoice.billerCountry" />
+            <input type="text" id="billerCountry" required v-model="newInvoice.clientCountry" />
           </div>
         </div>
       </div>
@@ -157,10 +157,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, watch } from 'vue'
+import { reactive, watch } from 'vue'
 import type { invoice } from '@/interface/IInvoice'
 import { useInvoiceModelStore } from '@/stores/invoiceModelStore'
 import { uuid } from 'vue3-uuid'
+import { db } from '@/firestore/firestoreInit'
+import { doc, setDoc } from 'firebase/firestore'
 
 const invoiceModelStore = useInvoiceModelStore()
 
@@ -181,11 +183,9 @@ const newInvoice: invoice = reactive({
   productDescription: '',
   invoicePending: false,
   invoiceDraft: false,
-  invoiceItemList: [{ qty: 0, price: 0 }],
-  invoiceTotal: undefined
+  invoiceItemList: [{ id: uuid.v4(), name: '', qty: 0, price: 0, total: 0 }],
+  invoiceTotal: 0
 })
-
-newInvoice.invoiceItemList = []
 
 const dateUnix = Date.now()
 const options: Intl.DateTimeFormatOptions = {
@@ -205,7 +205,7 @@ watch(
   }
 )
 
-const addNewItem = () => {
+const addNewItem = (): void => {
   const newItem = {
     id: uuid.v4(),
     name: '',
@@ -216,7 +216,25 @@ const addNewItem = () => {
   newInvoice.invoiceItemList.push(newItem)
 }
 
-const closeInvoiceModel = () => {
+const closeInvoiceModel = (): void => {
   invoiceModelStore.toggleInvoiceModel()
+}
+
+const invoiceTotal = (): void => {
+  newInvoice.invoiceTotal = 0
+  newInvoice.invoiceItemList.reduce((accumulator, currentItem) => {
+    return (accumulator += currentItem.total)
+  }, newInvoice.invoiceTotal)
+}
+
+const insertToDatabase = async (): Promise<void> => {
+  invoiceTotal()
+
+  await setDoc(doc(db, 'InvoiceApp', uuid.v4()), newInvoice)
+  invoiceModelStore.toggleInvoiceModel()
+}
+
+const submitInvoice = (): void => {
+  insertToDatabase()
 }
 </script>
