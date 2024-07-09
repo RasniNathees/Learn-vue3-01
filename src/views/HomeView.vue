@@ -9,7 +9,7 @@
         <div class="filter flex">
           <div @click="showFilterMenu" class="flex">
             <span>Filter Menue</span>
-            <img src="@/assets/logo.svg" width="20px" height="20px" alt="" />
+            <img src="@/assets/filter.png" width="20px" height="20px" alt="" />
             <ul v-show="showFilter" class="filter-menu">
               <li>sdf</li>
               <li>sdf</li>
@@ -20,7 +20,7 @@
         </div>
         <div @click="openInvoiceModel" class="button flex">
           <div class="inner-button flex">
-            <img src="@/assets/logo.svg" width="20px" height="20px" alt="" />
+            <img src="@/assets/add.png" width="20px" height="20px" alt="" />
           </div>
           <span>Add New</span>
         </div>

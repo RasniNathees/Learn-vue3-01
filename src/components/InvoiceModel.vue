@@ -130,14 +130,14 @@
               <td class="qty"><input type="text" v-model="item.qty" /></td>
               <td class="price"><input type="text" v-model="item.price" /></td>
               <td class="total">{{ (item.total = item.qty * item.price) }}</td>
-              <td class="action">
-                <img src="@/assets/logo.svg" alt="" />
+              <td class="action delete" @click="deleteItem(item.id)">
+                <img src="@/assets/delete.png" alt="" />
               </td>
             </tr>
           </tbody>
         </table>
         <div @click="addNewItem" class="button flex">
-          <img src="" alt="" />
+          <img src="@/assets/add.png" alt="" height="24px" width="24px" />
           <span>Add New</span>
         </div>
       </div>
@@ -255,5 +255,9 @@ const checkClick = (event: Event): void => {
   if (event.target === invoiceWrap.value) {
     invoiceModelStore.toggleMessageeModel()
   }
+}
+
+const deleteItem = (id: string): void => {
+  newInvoice.invoiceItemList = newInvoice.invoiceItemList.filter((item) => item.id != id)
 }
 </script>

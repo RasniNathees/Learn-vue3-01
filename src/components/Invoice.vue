@@ -18,7 +18,7 @@
         <span v-if="data?.invoiceDraft">Draft</span>
       </div>
       <div class="icon">
-        <img src="@/assets/logo.svg" alt="" height="12px" width="12px" />
+        <img src="@/assets/r-arrow.png" alt="" height="12px" width="12px" />
       </div>
     </div>
   </RouterLink>
