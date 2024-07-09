@@ -1,5 +1,5 @@
 <template>
-  <div class="invoice-model-wrap flex flex-column">
+  <div @click="checkClick" ref="invoiceWrap" class="invoice-model-wrap flex flex-column">
     <form @submit.prevent="submitInvoice" class="invoice-content flex flex-column">
       <h1>New Invoice</h1>
 
@@ -145,11 +145,11 @@
       <!-- save -->
       <div class="save-exit flex">
         <div class="left flex">
-          <button @click="closeInvoiceModel" class="red">Cencel</button>
+          <button type="button" @click="closeInvoiceModel" class="red">Cencel</button>
         </div>
         <div class="right flex">
-          <button class="dark-purple">save</button>
-          <button class="dark-purple">Draft</button>
+          <button @click="saveInvoice" type="submit" class="dark-purple">save</button>
+          <button @click="saveDraft" type="submit" class="dark-purple">Draft</button>
         </div>
       </div>
     </form>
@@ -157,7 +157,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, watch } from 'vue'
+import { reactive, watch, ref } from 'vue'
 import type { invoice } from '@/interface/IInvoice'
 import { useInvoiceModelStore } from '@/stores/invoiceModelStore'
 import { uuid } from 'vue3-uuid'
@@ -165,8 +165,9 @@ import { db } from '@/firestore/firestoreInit'
 import { doc, setDoc } from 'firebase/firestore'
 
 const invoiceModelStore = useInvoiceModelStore()
-
+const invoiceWrap = ref(null)
 const newInvoice: invoice = reactive({
+  docId: '',
   billerStreetAddress: '',
   billerCity: '',
   billerZipCode: undefined,
@@ -222,19 +223,34 @@ const closeInvoiceModel = (): void => {
 
 const invoiceTotal = (): void => {
   newInvoice.invoiceTotal = 0
-  newInvoice.invoiceItemList.reduce((accumulator, currentItem) => {
+  newInvoice.invoiceTotal = newInvoice.invoiceItemList.reduce((accumulator, currentItem) => {
     return (accumulator += currentItem.total)
   }, newInvoice.invoiceTotal)
 }
 
 const insertToDatabase = async (): Promise<void> => {
   invoiceTotal()
-
-  await setDoc(doc(db, 'InvoiceApp', uuid.v4()), newInvoice)
+  const id = uuid.v4()
+  newInvoice.docId = id
+  await setDoc(doc(db, 'InvoiceApp', id), newInvoice)
   invoiceModelStore.toggleInvoiceModel()
 }
 
 const submitInvoice = (): void => {
   insertToDatabase()
+}
+
+const saveInvoice = (): void => {
+  newInvoice.invoicePending = true
+}
+
+const saveDraft = (): void => {
+  newInvoice.invoiceDraft = true
+}
+
+const checkClick = (event: Event): void => {
+  if (event.target === invoiceWrap.value) {
+    invoiceModelStore.toggleMessageeModel()
+  }
 }
 </script>
