@@ -26,12 +26,16 @@
         </div>
       </div>
     </div>
+    <div>
+      <Invoice v-for="(invoice, index) in invoiceData" :key="index" :data="invoice" />
+    </div>
   </div>
 </template>
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useInvoiceModelStore } from '@/stores/invoiceModelStore'
 
+import Invoice from '@/components/Invoice.vue'
 const invoiceModelStore = useInvoiceModelStore()
 
 let showFilter = ref<boolean>(false)
@@ -44,4 +48,6 @@ const openInvoiceModel = (): void => {
   const isModelOpen = invoiceModelStore.invoiceModel
   if (!isModelOpen) invoiceModelStore.toggleInvoiceModel()
 }
+
+const invoiceData = computed(() => invoiceModelStore.invoiceData)
 </script>

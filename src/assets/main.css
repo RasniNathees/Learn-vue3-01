@@ -144,7 +144,7 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: var(--rc-background-color);
+  background-color: transparent;
   color: var(--rc-text-color);
   width: 100%;
   height: 100vh;
@@ -158,6 +158,7 @@ header {
   }
 
   .invoice-content {
+    background-color: var(--rc-background-color);
     max-width: 700px;
     padding: 60px;
     width: 100%;
@@ -352,7 +353,7 @@ button,
 
 .invoice-message-model-enter-active,
 .invoice-message-model-leave-active {
-  transition: 0.05s ease-in-out;
+  transition: 0.03s ease-in-out;
 }
 
 /* loading animation */
@@ -383,4 +384,78 @@ button,
   to {
     transform: rotateZ(360deg);
   }
+}
+
+.invoice {
+  background-color: rgba(161, 0, 75, 0.749);
+  text-decoration: none;
+  margin-bottom: 20px;
+  padding: 25px 30px;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  color: var(--rc-text-color);
+  border-radius: 50px;
+  font-size: 15px;
+
+  .left {
+    flex-basis: 60%;
+    gap: 16px;
+    text-align: center;
+    align-items: center;
+
+    span {
+      flex: 1;
+    }
+    .docId {
+      text-transform: uppercase;
+    }
+  }
+  .right {
+    flex-basis: 40%;
+    align-items: center;
+    gap: 20px;
+    span {
+      flex: 1;
+    }
+    .price {
+      font-weight: bold;
+    }
+  }
+}
+
+.status-button {
+  &::before {
+    content: '';
+    display: inline-block;
+    align-items: center;
+    width: 10px;
+    height: 10px;
+    margin-right: 8px;
+    border-radius: 50%;
+  }
+  font-size: 12px;
+  margin-right: 30px;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 32px;
+  border-radius: 8px;
+
+  max-width: 240px;
+}
+
+.pending {
+  &::before {
+    background-color: orange;
+  }
+  color: orange;
+  background-color: rgb(2, 10, 57);
+}
+
+.draft {
+  &::before {
+    background-color: gainsboro;
+  }
+  color: gainsboro;
+  background-color: rgb(0, 32, 20);
 }
