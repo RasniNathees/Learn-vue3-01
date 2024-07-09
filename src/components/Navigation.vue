@@ -2,7 +2,7 @@
   <div class="flex flex-column">
     <header>
       <div class="flex branding">
-        <img src="@/assets/logo.svg" alt="" />
+        <img src="@/assets/menu-burger.svg" alt="" />
       </div>
     </header>
   </div>
