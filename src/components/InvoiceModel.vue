@@ -1,5 +1,5 @@
 <template>
-  <div class="invoice-model-wrap flex flex-column">
+  <div @click="checkClick" ref="invoiceWrap" class="invoice-model-wrap flex flex-column">
     <form @submit.prevent="submitInvoice" class="invoice-content flex flex-column">
       <h1>New Invoice</h1>
 
@@ -157,7 +157,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, watch } from 'vue'
+import { reactive, watch, ref } from 'vue'
 import type { invoice } from '@/interface/IInvoice'
 import { useInvoiceModelStore } from '@/stores/invoiceModelStore'
 import { uuid } from 'vue3-uuid'
@@ -165,7 +165,7 @@ import { db } from '@/firestore/firestoreInit'
 import { doc, setDoc } from 'firebase/firestore'
 
 const invoiceModelStore = useInvoiceModelStore()
-
+const invoiceWrap = ref(null)
 const newInvoice: invoice = reactive({
   docId: '',
   billerStreetAddress: '',
@@ -246,5 +246,11 @@ const saveInvoice = (): void => {
 
 const saveDraft = (): void => {
   newInvoice.invoiceDraft = true
+}
+
+const checkClick = (event: Event): void => {
+  if (event.target === invoiceWrap.value) {
+    invoiceModelStore.toggleMessageeModel()
+  }
 }
 </script>
