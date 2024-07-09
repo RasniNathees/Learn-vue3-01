@@ -1,8 +1,11 @@
 :root {
-  --rc-background-color: #0c1844;
-  --rc-primary-color: #c80036;
-  --rc-secondary-color: #ff6969;
-  --rc-text-color: #fff5e1;
+  --rc-text: #e3effa;
+  --rc-background: #05151f;
+  --rc-primary: #87c1ea;
+  --rc-secondary: #871765;
+  --rc-accent: #de3f51;
+  --rc-background-header: #020009b7;
+  --rc-dropdown: #020009;
 }
 
 * {
@@ -21,7 +24,7 @@
 
 header {
   z-index: 99;
-  background-color: var(--rc-primary-color);
+  background-color: var(--rc-background-header);
   flex-direction: row;
   @media (min-width: 900px) {
     flex-direction: column;
@@ -30,7 +33,7 @@ header {
   }
 
   .branding {
-    background-color: var(--rc-secondary-color);
+    background-color: var(--rc-primary);
     border-radius: 0 40px 40px 0;
 
     padding: 20px;
@@ -45,7 +48,7 @@ header {
 .app {
   min-height: 100vh;
   flex-direction: column !important;
-  background-color: var(--rc-background-color);
+  background-color: var(--rc-background);
   @media (min-width: 900px) {
     flex-direction: row !important;
   }
@@ -68,7 +71,7 @@ header {
   }
 }
 .home {
-  color: var(--rc-text-color);
+  color: var(--rc-text);
 
   .header {
     margin-bottom: 80px;
@@ -105,7 +108,7 @@ header {
           top: 25px;
           list-style: none;
           width: 140px;
-          background-color: var(--rc-primary-color);
+          background-color: var(--rc-dropdown);
           box-shadow:
             0 4px -1px rgba(0, 0, 0, 0.1),
             0 2px 4px -1px rgba(0, 0, 0, 0.6);
@@ -115,7 +118,7 @@ header {
             padding: 10px 2px;
 
             &:hover {
-              background-color: var(--rc-secondary-color);
+              background-color: var(--rc-accent);
             }
           }
         }
@@ -123,7 +126,7 @@ header {
 
       /* add new button */
       .button {
-        background-color: var(--rc-secondary-color);
+        background-color: var(--rc-accent);
         padding: 8px;
         border-radius: 30px;
         .inner-button {
@@ -132,7 +135,7 @@ header {
           margin-right: 10px;
           align-items: center;
           justify-content: center;
-          background-color: var(--rc-primary-color);
+          background-color: var(--rc-secondary);
         }
       }
     }
@@ -145,7 +148,7 @@ header {
   top: 0;
   left: 0;
   background-color: transparent;
-  color: var(--rc-text-color);
+  color: var(--rc-text);
   width: 100%;
   height: 100vh;
   overflow: scroll;
@@ -158,7 +161,7 @@ header {
   }
 
   .invoice-content {
-    background-color: var(--rc-background-color);
+    background-color: var(--rc-background);
     max-width: 700px;
     padding: 60px;
     width: 100%;
@@ -170,12 +173,12 @@ header {
     h1 {
       margin-bottom: 50px;
       font-size: 32px;
-      color: var(--rc-primary-color);
+      color: var(--rc-primary);
     }
     h3 {
       margin-bottom: 30px;
       font-size: 22px;
-      color: var(--rc-secondary-color);
+      color: var(--rc-secondary);
     }
     h4 {
       margin-bottom: 20px;
@@ -249,7 +252,7 @@ header {
 
       .button {
         margin-top: 20px;
-        background-color: var(--rc-primary-color);
+        background-color: var(--rc-accent);
         margin-bottom: 50px;
         padding: 10px 8px;
         align-items: center;
@@ -258,7 +261,7 @@ header {
     }
     .input {
       margin-bottom: 20px;
-      background-color: var(--rc-primary-color);
+      background-color: var(--rc-secondary);
       border-radius: 7px;
     }
     label {
@@ -270,8 +273,8 @@ header {
     input,
     select {
       width: 100%;
-      background-color: black;
-      color: var(--rc-text-color);
+      background-color: var(--rc-dropdown);
+      color: var(--rc-text);
       border: none;
       padding: 12px;
       &:focus {
@@ -296,7 +299,7 @@ button,
   border: none;
   font-size: 14px;
   margin-right: 8px;
-  color: #fff;
+  color: var(--rc-text);
   border-radius: 25px;
 }
 .dark-purple {
@@ -304,7 +307,7 @@ button,
 }
 
 .red {
-  background-color: #ec5757;
+  background-color: red;
 }
 .invoice-animation-enter-active,
 .invoice-animation-leave-active {
@@ -337,7 +340,7 @@ button,
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.36);
     p {
-      color: var(--rc-text-color);
+      color: var(--rc-text);
       text-align: center;
     }
 
@@ -375,8 +378,8 @@ button,
     margin: 0 auto;
     border: 3px solid transparent;
     border-radius: 50%;
-    border-bottom-color: var(--rc-primary-color);
-    border-top-color: var(--rc-secondary-color);
+    border-bottom-color: var(--rc-accent);
+    border-top-color: var(--rc-secondary);
     animation: spin ease 1000ms infinite;
   }
 }
@@ -387,14 +390,14 @@ button,
 }
 
 .invoice {
-  background-color: rgba(161, 0, 75, 0.749);
+  background-color: var(--rc-background-header);
   text-decoration: none;
   margin-bottom: 20px;
   padding: 25px 30px;
   align-items: center;
   gap: 16px;
   cursor: pointer;
-  color: var(--rc-text-color);
+  color: var(--rc-text);
   border-radius: 50px;
   font-size: 15px;
 
@@ -446,16 +449,16 @@ button,
 
 .pending {
   &::before {
-    background-color: orange;
+    background-color: var(--rc-accent);
   }
-  color: orange;
-  background-color: rgb(2, 10, 57);
+  color: var(--rc-accent);
+  background-color: var(--rc-secondary);
 }
 
 .draft {
   &::before {
-    background-color: gainsboro;
+    background-color: var(--rc-text);
   }
-  color: gainsboro;
-  background-color: rgb(0, 32, 20);
+  color: var(--rc-text);
+  background-color: var(--rc-accent);
 }
