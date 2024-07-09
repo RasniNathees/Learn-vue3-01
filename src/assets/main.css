@@ -372,7 +372,7 @@ button,
     height: 60px;
     width: 60px;
     margin: 0 auto;
-    border: 2.5px solid transparent;
+    border: 3px solid transparent;
     border-radius: 50%;
     border-bottom-color: var(--rc-primary-color);
     border-top-color: var(--rc-secondary-color);
