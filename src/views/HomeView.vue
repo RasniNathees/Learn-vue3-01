@@ -3,7 +3,7 @@
     <div class="header flex">
       <div class="div left flex flex-column">
         <h1>Invoices</h1>
-        <span>there are 5 invoices</span>
+        <span>there are {{ totalInvoices }} invoices</span>
       </div>
       <div class="right flex">
         <div class="filter flex">
@@ -35,7 +35,7 @@ import { useInvoiceModelStore } from '@/stores/invoiceModelStore'
 const invoiceModelStore = useInvoiceModelStore()
 
 let showFilter = ref<boolean>(false)
-
+const totalInvoices = computed(() => invoiceModelStore.invoiceData.length)
 const showFilterMenu = (): void => {
   showFilter.value = !showFilter.value
 }
