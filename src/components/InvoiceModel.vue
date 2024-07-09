@@ -229,11 +229,14 @@ const invoiceTotal = (): void => {
 }
 
 const insertToDatabase = async (): Promise<void> => {
+  invoiceModelStore.toggleLoading()
   invoiceTotal()
   const id = uuid.v4()
   newInvoice.docId = id
   await setDoc(doc(db, 'InvoiceApp', id), newInvoice)
+
   invoiceModelStore.toggleInvoiceModel()
+  invoiceModelStore.toggleLoading()
 }
 
 const submitInvoice = (): void => {
