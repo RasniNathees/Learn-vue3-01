@@ -1,4 +1,5 @@
 export interface invoice {
+  docId: string
   billerStreetAddress: string
   billerCity: string
   billerZipCode: number | undefined

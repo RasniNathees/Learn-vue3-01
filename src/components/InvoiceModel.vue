@@ -145,11 +145,11 @@
       <!-- save -->
       <div class="save-exit flex">
         <div class="left flex">
-          <button @click="closeInvoiceModel" class="red">Cencel</button>
+          <button type="button" @click="closeInvoiceModel" class="red">Cencel</button>
         </div>
         <div class="right flex">
-          <button class="dark-purple">save</button>
-          <button class="dark-purple">Draft</button>
+          <button @click="saveInvoice" type="submit" class="dark-purple">save</button>
+          <button @click="saveDraft" type="submit" class="dark-purple">Draft</button>
         </div>
       </div>
     </form>
@@ -167,6 +167,7 @@ import { doc, setDoc } from 'firebase/firestore'
 const invoiceModelStore = useInvoiceModelStore()
 
 const newInvoice: invoice = reactive({
+  docId: '',
   billerStreetAddress: '',
   billerCity: '',
   billerZipCode: undefined,
@@ -222,19 +223,28 @@ const closeInvoiceModel = (): void => {
 
 const invoiceTotal = (): void => {
   newInvoice.invoiceTotal = 0
-  newInvoice.invoiceItemList.reduce((accumulator, currentItem) => {
+  newInvoice.invoiceTotal = newInvoice.invoiceItemList.reduce((accumulator, currentItem) => {
     return (accumulator += currentItem.total)
   }, newInvoice.invoiceTotal)
 }
 
 const insertToDatabase = async (): Promise<void> => {
   invoiceTotal()
-
-  await setDoc(doc(db, 'InvoiceApp', uuid.v4()), newInvoice)
+  const id = uuid.v4()
+  newInvoice.docId = id
+  await setDoc(doc(db, 'InvoiceApp', id), newInvoice)
   invoiceModelStore.toggleInvoiceModel()
 }
 
 const submitInvoice = (): void => {
   insertToDatabase()
+}
+
+const saveInvoice = (): void => {
+  newInvoice.invoicePending = true
+}
+
+const saveDraft = (): void => {
+  newInvoice.invoiceDraft = true
 }
 </script>
