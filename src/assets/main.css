@@ -354,3 +354,33 @@ button,
 .invoice-message-model-leave-active {
   transition: 0.05s ease-in-out;
 }
+
+/* loading animation */
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 300;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(81, 32, 32, 0.205);
+
+  span {
+    display: block;
+    height: 60px;
+    width: 60px;
+    margin: 0 auto;
+    border: 2.5px solid transparent;
+    border-radius: 50%;
+    border-bottom-color: var(--rc-primary-color);
+    border-top-color: var(--rc-secondary-color);
+    animation: spin ease 1000ms infinite;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotateZ(360deg);
+  }
+}
