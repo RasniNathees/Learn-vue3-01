@@ -237,6 +237,7 @@ const insertToDatabase = async (): Promise<void> => {
 
   invoiceModelStore.toggleInvoiceModel()
   invoiceModelStore.toggleLoading()
+  invoiceModelStore.loadInvoiceData()
 }
 
 const submitInvoice = (): void => {
