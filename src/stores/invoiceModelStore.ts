@@ -10,7 +10,12 @@ export const useInvoiceModelStore = defineStore('invoice', {
     loading: false,
     invoiceData: [] as invoice[]
   }),
-  getters: {},
+  getters: {
+    getInvoice(state) {
+      return (docId: string | string[]) =>
+        state.invoiceData.find((invoice) => invoice.docId === docId)
+    }
+  },
   actions: {
     toggleInvoiceModel(): void {
       this.invoiceModel = !this.invoiceModel
