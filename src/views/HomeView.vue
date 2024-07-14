@@ -45,6 +45,7 @@ const showFilterMenu = (): void => {
 }
 
 const openInvoiceModel = (): void => {
+  invoiceModelStore.toggleNew()
   const isModelOpen = invoiceModelStore.invoiceModel
   if (!isModelOpen) invoiceModelStore.toggleInvoiceModel()
 }
