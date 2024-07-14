@@ -51,13 +51,13 @@ export const useInvoiceModelStore = defineStore('invoice', {
             productDescription: doc.data().productDescription,
             invoicePending: doc.data().invoicePending,
             invoiceDraft: doc.data().invoiceDraft,
+            invoicePaid: doc.data().invoicePaid,
             invoiceItemList: doc.data().invoiceItemList,
             invoiceTotal: doc.data().invoiceTotal
           }
           this.invoiceData.push(data)
         }
       })
-
       this.loading = false
     }
   }

@@ -464,6 +464,14 @@ button,
   background-color: var(--rc-primary);
 }
 
+.paid {
+  &::before {
+    background-color: green;
+  }
+  color: green;
+  background-color: black;
+}
+
 .draft {
   &::before {
     background-color: var(--rc-text);

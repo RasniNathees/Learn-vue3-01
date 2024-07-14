@@ -184,6 +184,7 @@ const newInvoice: invoice = reactive({
   productDescription: '',
   invoicePending: false,
   invoiceDraft: false,
+  invoicePaid: false,
   invoiceItemList: [{ id: uuid.v4(), name: '', qty: 0, price: 0, total: 0 }],
   invoiceTotal: 0
 })

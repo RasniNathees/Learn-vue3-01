@@ -7,16 +7,26 @@
           <span>Status</span>
           <div
             class="status-button"
-            :class="{ pending: invoice?.invoicePending, draft: invoice?.invoiceDraft }"
+            :class="{
+              pending: invoice?.invoicePending,
+              draft: invoice?.invoiceDraft,
+              paid: invoice?.invoicePaid
+            }"
           >
             <span v-if="invoice?.invoicePending">Pending</span>
             <span v-if="invoice?.invoiceDraft">Draft</span>
+            <span v-if="invoice?.invoicePaid">Paid</span>
           </div>
         </div>
         <div class="right flex">
           <button class="red">Delete</button>
           <button class="dark-purple">Edit</button>
-          <button class="green">Paid</button>
+          <button v-if="invoice?.invoiceDraft || invoice?.invoicePending" class="green">
+            Paid
+          </button>
+          <button v-if="invoice?.invoicePaid || invoice?.invoiceDraft" class="green">
+            Pending
+          </button>
         </div>
       </div>
       <div class="body flex flex-column">
@@ -77,9 +87,9 @@
 <script setup lang="ts">
 import { useInvoiceModelStore } from '@/stores/invoiceModelStore'
 import { useRoute, RouterLink } from 'vue-router'
+import { computed } from 'vue'
 const invoiceStore = useInvoiceModelStore()
 const route = useRoute()
 const docId: string | string[] = route.params.invoiceId
-const invoice = invoiceStore.getInvoice(docId)
-console.log(invoiceStore.invoiceData)
+const invoice = computed(() => invoiceStore.getInvoice(docId))
 </script>
