@@ -26,6 +26,5 @@ import Loading from '@/components/Loading.vue'
 import { useInvoiceModelStore } from '@/stores/invoiceModelStore'
 
 const invoiceModelStore = useInvoiceModelStore()
-
 invoiceModelStore.loadInvoiceData()
 </script>

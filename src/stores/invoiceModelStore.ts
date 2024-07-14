@@ -8,12 +8,15 @@ export const useInvoiceModelStore = defineStore('invoice', {
     invoiceModel: false,
     messageModel: false,
     loading: false,
-    invoiceData: [] as invoice[]
+    invoiceData: [] as invoice[],
+    isEdit: false,
+    isDelete: false,
+    deleteConfirm: false,
+    cInvoice: {} as invoice
   }),
   getters: {
     getInvoice(state) {
-      return (docId: string | string[]) =>
-        state.invoiceData.find((invoice) => invoice.docId === docId)
+      return () => state.cInvoice
     }
   },
   actions: {
@@ -51,14 +54,29 @@ export const useInvoiceModelStore = defineStore('invoice', {
             productDescription: doc.data().productDescription,
             invoicePending: doc.data().invoicePending,
             invoiceDraft: doc.data().invoiceDraft,
+            invoicePaid: doc.data().invoicePaid,
             invoiceItemList: doc.data().invoiceItemList,
             invoiceTotal: doc.data().invoiceTotal
           }
           this.invoiceData.push(data)
         }
       })
-
       this.loading = false
+    },
+    toggleEdit() {
+      this.isEdit = true
+    },
+    toggleNew() {
+      this.isEdit = false
+    },
+    currentInvoice(docId: string | string[]) {
+      this.cInvoice = this.invoiceData.find((invoice) => invoice.docId === docId) as invoice
+    },
+    toggleDelete() {
+      this.isDelete = !this.isDelete
+    },
+    toggleDeleteConfirm() {
+      this.deleteConfirm = !this.deleteConfirm
     }
   }
 })
