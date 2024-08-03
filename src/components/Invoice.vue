@@ -12,10 +12,15 @@
       <span class="price">{{ props.data?.invoiceTotal }}</span>
       <div
         class="status-button"
-        :class="{ pending: data?.invoicePending, draft: data?.invoiceDraft }"
+        :class="{
+          pending: data?.invoicePending,
+          draft: data?.invoiceDraft,
+          paid: data?.invoicePaid
+        }"
       >
         <span v-if="data?.invoicePending">Pending</span>
         <span v-if="data?.invoiceDraft">Draft</span>
+        <span v-if="data?.invoicePaid">Paid</span>
       </div>
       <div class="icon">
         <img src="@/assets/r-arrow.png" alt="" height="12px" width="12px" />
