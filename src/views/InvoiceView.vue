@@ -22,7 +22,13 @@
           <button @click="edit" class="dark-purple">Edit</button>
           <button @click="deleteInvoice" class="red">Delete</button>
           <button @click="paid" v-if="invoice?.invoicePending" class="green">Paid</button>
-          <button @click="pending" v-if="invoice?.invoicePaid" class="green">Pending</button>
+          <button
+            @click="pending"
+            v-if="invoice?.invoicePaid || invoice?.invoiceDraft"
+            class="green"
+          >
+            Pending
+          </button>
         </div>
       </div>
       <div class="body flex flex-column">
@@ -106,10 +112,12 @@ const paid = async () => {
   const docRef = doc(db, 'InvoiceApp', invoice.value.docId)
   await updateDoc(docRef, {
     invoicePaid: true,
-    invoicePending: false
+    invoicePending: false,
+    invoiceDraft: false
   })
   invoice.value.invoicePaid = true
   invoice.value.invoicePending = false
+  invoice.value.invoiceDraft = false
   invoiceStore.loadInvoiceData()
 }
 const pending = async () => {
@@ -117,10 +125,12 @@ const pending = async () => {
   const docRef = doc(db, 'InvoiceApp', invoice.value.docId)
   await updateDoc(docRef, {
     invoicePaid: false,
-    invoicePending: true
+    invoicePending: true,
+    invoiceDraft: false
   })
   invoice.value.invoicePaid = false
   invoice.value.invoicePending = true
+  invoice.value.invoiceDraft = false
   invoiceStore.loadInvoiceData()
 }
 

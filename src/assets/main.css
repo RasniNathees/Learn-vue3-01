@@ -466,10 +466,10 @@ button,
 
 .paid {
   &::before {
-    background-color: green;
+    background-color: var(--rc-accent);
   }
-  color: green;
-  background-color: black;
+  color: var(--rc-accent);
+  background-color: white;
 }
 
 .draft {
