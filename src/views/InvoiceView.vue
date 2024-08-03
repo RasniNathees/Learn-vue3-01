@@ -135,11 +135,11 @@ const pending = async () => {
 }
 
 const deleteInvoice = async () => {
-  invoiceStore.toggleDelete()
+  router.push({ name: 'home' })
+  // invoiceStore.toggleDelete()
   // invoiceStore.toggleMessageeModel()
   await deleteDoc(doc(db, 'InvoiceApp', invoice.value.docId))
   invoiceStore.invoiceData = []
   invoiceStore.loadInvoiceData()
-  router.push({ name: 'home' })
 }
 </script>
