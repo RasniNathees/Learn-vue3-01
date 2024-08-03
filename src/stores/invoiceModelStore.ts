@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import type { invoice } from '@/interface/IInvoice'
 import { db } from '@/firestore/firestoreInit'
-import { doc, query, collection, getDocs } from 'firebase/firestore'
+import { doc, query, collection, getDocs, deleteDoc } from 'firebase/firestore'
 
 export const useInvoiceModelStore = defineStore('invoice', {
   state: () => ({
@@ -77,6 +77,11 @@ export const useInvoiceModelStore = defineStore('invoice', {
     },
     toggleDeleteConfirm() {
       this.deleteConfirm = !this.deleteConfirm
+    },
+    async deleteInvoice(docId: string) {
+      this.deleteConfirm = !this.deleteConfirm
+      this.invoiceData = this.invoiceData.filter((invoice) => invoice.docId != docId)
+      await deleteDoc(doc(db, 'InvoiceApp', docId))
     }
   }
 })
